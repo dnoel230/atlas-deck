@@ -1,136 +1,213 @@
-           iPad Pro
-               │
-        Atlas Dashboard
-               │
-      Raspberry Pi Zero 2 W
-               │
-     ┌─────────┴─────────┐
-     │                   │
- Raspberry Pi 5      Orange Pi
- AI • Docker          Network
-     │                   │
-     └─────────┬─────────┘
-               │
-        Your Home Network
-
-README Introduction
-
-Atlas Deck
-
-Atlas Deck is an open-source, modular platform for building a private, AI-powered workspace using hardware you already own.
-
-Whether you’re managing a homelab, developing software, learning Linux, or running local AI models, Atlas Deck provides a unified interface to connect your devices, automate workflows, and stay in control of your data.
-
-Instead of replacing your hardware, Atlas Deck extends it.
-
-It supports Raspberry Pi, Orange Pi, Windows, Linux, macOS, and iPad-based workflows while remaining privacy-first and self-hosted by design.
-
-Vision
-
-Our goal is simple:
-
-Build a private, modular operating platform for personal infrastructure.
-
-Atlas Deck connects your devices into one ecosystem where AI, automation, networking, storage, and development tools work together through a common interface.
-
-Core Principles
-
-* Privacy First
-* Local AI
-* Self-Hosted
-* Modular Plugins
-* Hardware Agnostic
-* Open Source
-* Community Driven
-
-Current Features
-
-* Terminal dashboard
-* Raspberry Pi support
-* Homelab management
-* Tailscale integration
-* SSH management
-* Plugin architecture (in development)
-* Automated installation
-* GitHub-based development workflow
-
-Planned Features
-
-* Web dashboard optimized for iPad
-* Plugin marketplace
-* Local AI integration
-* Docker management
-* Home Assistant integration
-* Documentation server
-* Mobile-first interface
-* Cross-platform support
-
-Supported Hardware
-
-* Raspberry Pi Zero 2 W
-* Raspberry Pi 5
-* Orange Pi
-* Windows PCs
-* Linux
-* macOS
-* iPad Pro (primary mobile interface)
-
-Why Atlas Deck?
-
-Many tools solve one problem well—home automation, containers, remote access, or local AI—but they often exist in separate ecosystems.
-
-Atlas Deck aims to bring these capabilities together into a cohesive, extensible platform. It gives you one place to manage your devices, services, and workflows while keeping your data under your control.
-
 # Atlas Deck
 
-Portable iPad + Raspberry Pi command deck for homelab, AI, productivity, and secure remote admin.
+> **Private AI. Modular Infrastructure. Your Hardware.**
 
-## Purpose
+Atlas Deck is an open-source platform for building a private, AI-powered workspace using the hardware you already own.
 
-Atlas Deck turns an iPad Pro, Raspberry Pi Zero 2 W, Raspberry Pi 5, Orange Pi Zero 3, and a Windows laptop into one connected mobile workstation.
+Instead of replacing your devices, Atlas Deck connects them into one secure, modular ecosystem where you can manage infrastructure, automate workflows, develop software, and run local AI—all while keeping your data under your control.
 
-## Hardware Roles
+Whether you're a homelab enthusiast, developer, student, or privacy-conscious user, Atlas Deck gives you a foundation to build on.
 
-| Device | Role |
-| --- | --- |
-| iPad Pro + keyboard | Main mobile interface |
-| Raspberry Pi Zero 2 W | Portable Linux node |
-| Raspberry Pi 5 | Home server, AI, Docker, storage |
-| Orange Pi Zero 3 | DNS, VPN, monitoring |
-| Windows laptop | Development and testing workstation |
+---
 
-## Features v0.1
+# Vision
 
-- One-command base install
+Atlas Deck aims to become the operating platform for personal infrastructure.
+
+Imagine connecting your Raspberry Pi, desktop, NAS, edge devices, and tablet into one cohesive workspace that is:
+
+- Privacy-first
+- AI-native
+- Self-hosted
+- Modular
+- Cross-platform
+- Community-driven
+
+No vendor lock-in.
+
+No required cloud services.
+
+Your hardware. Your data. Your rules.
+
+---
+
+# Why Atlas Deck?
+
+Today's tools solve individual problems.
+
+- One application manages Docker.
+- Another manages Home Assistant.
+- Another provides remote access.
+- Another hosts local AI.
+
+Atlas Deck brings these capabilities together into a single extensible platform.
+
+Instead of managing separate tools, Atlas provides one interface for your personal infrastructure.
+
+---
+
+# Core Principles
+
+- Privacy First
+- Local AI
+- Self-Hosted by Default
+- Modular Plugin Architecture
+- Hardware Agnostic
+- Open Source
+- Community Driven
+
+---
+
+# Current Features
+
 - Terminal dashboard
-- Homelab shortcuts
-- Pi 5 SSH shortcut
-- Orange Pi admin shortcut
-- Notes folder
-- Tailscale setup guide
-- Market brief placeholder
-- Nexus project menu placeholder
+- Automated installation
+- Raspberry Pi support
+- Homelab management
+- Secure SSH workflows
+- Tailscale integration
+- Plugin framework (in development)
+- GitHub-based development workflow
 
-## Quick Start
+---
+
+# Roadmap
+
+### v0.1
+- Terminal interface
+- Installer
+- System monitoring
+- SSH management
+- Homelab utilities
+
+### v0.2
+- Plugin manager
+- Hardware detection
+- Configuration system
+
+### v0.3
+- Web dashboard
+- iPad-optimized interface
+- Mobile-first design
+
+### v0.4
+- Docker management
+- Service monitoring
+- Plugin marketplace
+
+### v1.0
+- Stable releases
+- Complete documentation
+- Cross-platform support
+- Community plugin ecosystem
+
+---
+
+# Supported Hardware
+
+Atlas Deck is designed to run on inexpensive, commonly available hardware.
+
+Current targets include:
+
+- Raspberry Pi Zero 2 W
+- Raspberry Pi 5
+- Orange Pi
+- Windows
+- Linux
+- macOS
+
+Primary mobile interface:
+
+- iPad Pro
+- External keyboard support
+
+Future hardware support will continue expanding while maintaining a common user experience.
+
+---
+
+# Project Architecture
+
+```
+                iPad / Tablet
+                       │
+                Atlas Dashboard
+                       │
+              Edge Computing Node
+             (Pi Zero / Mini PC)
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+    AI Services     Home Lab      Automation
+        │              │              │
+        └──────────────┼──────────────┘
+                       │
+              Private Infrastructure
+```
+
+---
+
+# Quick Start
 
 ```bash
 git clone https://github.com/dnoel230/atlas-deck.git
+
 cd atlas-deck
+
 chmod +x install.sh atlas-menu.sh scripts/*.sh
+
 ./install.sh
+
 ./atlas-menu.sh
 ```
 
-## Recommended iPad Apps
+---
 
-- Blink Shell
-- Termius
-- Tailscale
-- Working Copy
-- GitHub
-- Files
-- Obsidian or Apple Notes
+# Contributing
 
-## Security Note
+Atlas Deck is an open-source community project.
 
-Keep private IPs, SSH keys, API keys, client data, and internal business documents out of this public repo.
+Whether you write code, improve documentation, test hardware, design interfaces, or build plugins, contributions are welcome.
+
+See:
+
+- CONTRIBUTING.md
+- SECURITY.md
+- CODE_OF_CONDUCT.md
+
+---
+
+# Security
+
+Atlas Deck is designed for systems you own or are authorized to manage.
+
+Please never commit:
+
+- API keys
+- Passwords
+- SSH keys
+- Client information
+- Sensitive business data
+
+---
+
+# License
+
+License to be announced before the first stable release.
+
+---
+
+# Join the Project
+
+Atlas Deck is just getting started.
+
+If you're interested in privacy, Raspberry Pi, edge computing, homelabs, local AI, or open-source infrastructure, we'd love your help.
+
+⭐ Star the repository
+
+🐛 Report issues
+
+💡 Suggest ideas
+
+🔧 Build plugins
+
+🚀 Help shape the future of Atlas Deck.
