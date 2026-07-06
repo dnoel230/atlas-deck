@@ -1,3 +1,18 @@
+           iPad Pro
+               │
+        Atlas Dashboard
+               │
+      Raspberry Pi Zero 2 W
+               │
+     ┌─────────┴─────────┐
+     │                   │
+ Raspberry Pi 5      Orange Pi
+ AI • Docker          Network
+     │                   │
+     └─────────┬─────────┘
+               │
+        Your Home Network
+
 README Introduction
 
 Atlas Deck
