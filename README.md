@@ -64,6 +64,7 @@ Instead of managing separate tools, Atlas provides one interface for your person
 - Automated installation
 - Raspberry Pi support
 - Homelab management
+- Connected energy dashboard (Home Assistant power/energy sensors)
 - Secure SSH workflows
 - Tailscale integration
 - Plugin framework (in development)

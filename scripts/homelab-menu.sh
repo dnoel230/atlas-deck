@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 while true; do
   clear
   echo "ATLAS HOMELAB"
@@ -10,6 +12,7 @@ while true; do
   echo "3. Open Home Assistant URL note"
   echo "4. Open Pi-hole URL note"
   echo "5. Show local network info"
+  echo "6. Connected Energy Dashboard"
   echo "0. Back"
   echo
   read -rp "Choose: " choice
@@ -20,6 +23,7 @@ while true; do
     3) echo "Set your Home Assistant URL in configs/homelab.env"; read -rp "Press Enter..." ;;
     4) echo "Set your Pi-hole URL in configs/homelab.env"; read -rp "Press Enter..." ;;
     5) ip route; echo; ip -brief addr; read -rp "Press Enter..." ;;
+    6) bash "$BASE_DIR/scripts/energy-dashboard.sh" ;;
     0) exit 0 ;;
     *) echo "Invalid option"; sleep 1 ;;
   esac
