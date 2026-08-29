@@ -81,6 +81,15 @@ model a source list was originally built around (e.g. a roofing or
 tax/wealth cross-sell scoring) — it only weighs factors relevant to selling
 energy audits.
 
+**Draft outreach email for a lead** turns a lead's stored recommended
+opening into a ready-to-copy email (subject, salutation, opening, sign-off),
+signed with `BUSINESS_NAME` / `CONTACT_EMAIL` / `CONTACT_PHONE` from
+`config.env` — see `config.env.example`. Leave them unset and the draft uses
+`[YOUR BUSINESS NAME]` / `[YOUR EMAIL]` / `[YOUR PHONE]` placeholders
+instead. Works on any lead with a note starting `Recommended opening:`
+(i.e. anything imported via the prospect importer); for a manually added
+building it prompts for one line to use instead.
+
 ## Incentives
 
 `data/incentives.sample.json` ships with three example entries (a federal

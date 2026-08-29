@@ -127,14 +127,14 @@ def recommended_opening(tier: str, properties_in_portfolio: float | None) -> str
     if tier in ("A+", "A"):
         return (
             f"Given the {properties}-property portfolio and recent acquisition activity, "
-            "worth a 15-minute portfolio-level energy risk conversation — most owners this "
-            "size are leaving meaningful utility spend on the table across their portfolio."
+            "it's worth a 15-minute portfolio-level energy risk conversation — most owners "
+            "this size are leaving meaningful utility spend on the table across their portfolio."
         )
     if tier == "B":
         return (
             f"A quick energy benchmarking pass across the largest properties in the "
-            f"{properties}-property portfolio often surfaces near-term utility savings — "
-            "worth sending a short overview."
+            f"{properties}-property portfolio often surfaces near-term utility savings, so "
+            "it's worth sending a short overview."
         )
     return (
         "Low-touch intro email: flag ENERGY STAR benchmarking / audit services and let "

@@ -20,6 +20,34 @@ import incentives  # noqa: E402
 import pm_import  # noqa: E402
 import prospect_import  # noqa: E402
 
+BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip() or "[YOUR BUSINESS NAME]"
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "").strip() or "[YOUR EMAIL]"
+CONTACT_PHONE = os.environ.get("CONTACT_PHONE", "").strip() or "[YOUR PHONE]"
+
+COMPANY_HINTS = ["inc", "corp", "llc", "trust", "group", "partners", "company",
+                  "co.", "health", "realty", "lp", "ltd", "associates"]
+
+
+def guess_first_name(owner: str, contact_name: str | None) -> str:
+    """Best-effort first name for a salutation, from owner/contact text.
+
+    Prospect rows store either a person as the owner (contact_name holds
+    their title, e.g. "CEO at Example Corp") or a company as the owner
+    (contact_name holds "Name (Title)"). Falls back to "there" when
+    neither pattern is recognizable.
+    """
+    owner_lower = owner.lower()
+    is_company = ("," in owner) or any(
+        f" {hint}" in f" {owner_lower} " or owner_lower.endswith(hint) for hint in COMPANY_HINTS
+    )
+    if not is_company and owner.split():
+        return owner.split()[0]
+    if contact_name and "(" in contact_name:
+        before = contact_name.split("(")[0].strip()
+        if before:
+            return before.split()[0]
+    return "there"
+
 
 def prompt(message: str, default: str | None = None) -> str:
     suffix = f" [{default}]" if default else ""
@@ -315,9 +343,50 @@ def top_priority_leads(conn) -> None:
             print(f"    {line}")
 
 
+def draft_email(conn) -> None:
+    print("\nDraft outreach email")
+    building = choose_building(conn)
+    if building is None:
+        return
+
+    opening = None
+    for line in (building["notes"] or "").splitlines():
+        if line.strip().startswith("Recommended opening:"):
+            opening = line.split(":", 1)[1].strip()
+            break
+    if opening is None:
+        opening = prompt("No stored recommended opening — type one line to use")
+        if not opening:
+            print("Cancelled — nothing to draft without an opening line.")
+            return
+
+    first_name = guess_first_name(building["name"], building["contact_name"])
+    properties_hint = ""
+    for line in (building["notes"] or "").splitlines():
+        if line.strip().startswith("Properties in portfolio:"):
+            properties_hint = line.split(":", 1)[1].strip()
+            break
+    subject_suffix = f"the {properties_hint}-property portfolio" if properties_hint else "your portfolio"
+
+    print(f"\nSubject: Quick question about {subject_suffix}")
+    print()
+    print(f"Hi {first_name},")
+    print()
+    print(opening)
+    print()
+    print("If it's useful, I can send a short one-page overview, or we could grab "
+          "15 minutes this week — whichever's easier.")
+    print()
+    print("Best,")
+    print("[YOUR NAME]")
+    print(BUSINESS_NAME)
+    print(f"{CONTACT_EMAIL} | {CONTACT_PHONE}")
+
+
 MENU = [
     ("List pipeline", list_pipeline),
     ("Top priority leads (A/A+ tier)", top_priority_leads),
+    ("Draft outreach email for a lead", draft_email),
     ("Add building / lead", add_building),
     ("View building detail", view_building),
     ("Update stage", update_stage),
