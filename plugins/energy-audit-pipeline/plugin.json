@@ -1,0 +1,6 @@
+{
+  "name": "energy-audit-pipeline",
+  "version": "0.1.0",
+  "description": "Retrofit audit pipeline: local CRM for audit leads, incentive matching, financing calculators, and ENERGY STAR Portfolio Manager CSV import.",
+  "entrypoint": "run.sh"
+}

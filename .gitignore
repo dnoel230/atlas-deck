@@ -1,0 +1,13 @@
+# Local secrets — copy configs/*.env.example instead
+configs/*.env
+!configs/*.env.example
+
+# Plugin-local config and caches
+plugins/*/config.env
+!plugins/*/config.env.example
+__pycache__/
+*.pyc
+
+# Local plugin data (default is outside the repo under ~/atlas-data, but
+# guard against it landing here too)
+plugins/*/data/*.db
