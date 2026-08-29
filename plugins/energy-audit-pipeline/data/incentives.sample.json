@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Federal Energy Efficient Commercial Buildings Deduction (IRC Section 179D)",
+    "level": "federal",
+    "state": "ALL",
+    "building_types": ["ALL"],
+    "measure_keywords": ["hvac", "lighting", "envelope", "building envelope", "whole-building"],
+    "summary": "Federal tax deduction for qualifying energy-efficient commercial building improvements.",
+    "verify": "Deduction amount is indexed annually and has separate rules for prevailing wage/apprenticeship. Confirm current $/sqft and eligibility at irs.gov before quoting a client."
+  },
+  {
+    "name": "USDA Rural Energy for America Program (REAP)",
+    "level": "federal",
+    "state": "ALL",
+    "building_types": ["agricultural", "rural small business"],
+    "measure_keywords": ["renewable", "solar", "efficiency", "hvac", "lighting"],
+    "summary": "Grants and guaranteed loans for energy efficiency and renewable energy for agricultural producers and rural small businesses.",
+    "verify": "Funding cycles and grant percentages change; confirm current terms at rd.usda.gov."
+  },
+  {
+    "name": "DSIRE state and utility incentive database",
+    "level": "reference",
+    "state": "ALL",
+    "building_types": ["ALL"],
+    "measure_keywords": ["ALL"],
+    "summary": "Not a program itself — the standard reference for looking up current state, utility, and local incentives by ZIP code.",
+    "verify": "Use dsireusa.org to find the specific programs live in the building's state/utility territory, then add them here as their own entries."
+  }
+]

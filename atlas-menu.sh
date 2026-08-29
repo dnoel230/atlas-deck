@@ -25,7 +25,8 @@ while true; do
   echo "6. Market Brief"
   echo "7. Notes"
   echo "8. Files"
-  echo "9. Update Atlas Deck"
+  echo "9. Plugins"
+  echo "10. Update Atlas Deck"
   echo "0. Exit"
   echo
   read -rp "Choose: " choice
@@ -39,7 +40,8 @@ while true; do
     6) run_script "scripts/market-brief.sh" ;;
     7) mkdir -p "$HOME/atlas-notes" && nano "$HOME/atlas-notes/today.md" ;;
     8) ranger "$HOME" || ls -la "$HOME" ; read -rp "Press Enter..." ;;
-    9) git -C "$BASE_DIR" pull --ff-only || true ; read -rp "Press Enter..." ;;
+    9) run_script "scripts/plugins-menu.sh" ;;
+    10) git -C "$BASE_DIR" pull --ff-only || true ; read -rp "Press Enter..." ;;
     0) exit 0 ;;
     *) echo "Invalid option"; sleep 1 ;;
   esac

@@ -67,7 +67,7 @@ Instead of managing separate tools, Atlas provides one interface for your person
 - Connected energy dashboard (Home Assistant power/energy sensors)
 - Secure SSH workflows
 - Tailscale integration
-- Plugin framework (in development)
+- Plugin framework, with a plugin menu and an energy audit/retrofit pipeline plugin
 - GitHub-based development workflow
 
 ---
