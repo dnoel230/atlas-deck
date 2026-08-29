@@ -57,6 +57,30 @@ score is a manual field on each building for now (set it from the
 building-detail view once you add an "edit" flow, or directly in the
 database).
 
+## Prospecting
+
+**Import prospect list (Owner / Portfolio)** takes a raw contact/portfolio
+export (columns like `Owner`, `Contact / Title`, `Properties In Portfolio`,
+`Portfolio Assessed Value`, `Last Acquisition Date` — the shape produced by
+most CRE prospecting tools) and scores each row for energy-audit fit using
+`src/energy_audit_scoring.py`:
+
+- **Portfolio size** (0-30) — more properties means more audit opportunity.
+- **Portfolio value** (0-20) — a proxy for capacity to fund retrofits.
+- **Acquisition recency** (0-25) — a recent acquisition often means capital
+  planning is already underway.
+- **Contact seniority** (0-25) — keyword-matched from the title text (CEO
+  > VP > Director > Manager > coordinator/assistant), since a decision-maker
+  is far more likely to take a cold audit pitch seriously.
+
+Each lead lands as a `LEAD` with its tier (`A+` down to `D`), score
+breakdown, and a tier-appropriate recommended opening line stored in its
+notes. **Top priority leads (A/A+ tier)** in the main menu pulls just those
+out as a call list. This scoring is deliberately independent of whatever
+model a source list was originally built around (e.g. a roofing or
+tax/wealth cross-sell scoring) — it only weighs factors relevant to selling
+energy audits.
+
 ## Incentives
 
 `data/incentives.sample.json` ships with three example entries (a federal

@@ -18,6 +18,7 @@ import db  # noqa: E402
 import financing  # noqa: E402
 import incentives  # noqa: E402
 import pm_import  # noqa: E402
+import prospect_import  # noqa: E402
 
 
 def prompt(message: str, default: str | None = None) -> str:
@@ -191,6 +192,11 @@ def view_building(conn) -> None:
     else:
         print("\n  No measures added yet.")
 
+    if building["notes"]:
+        print("\n  Notes:")
+        for line in building["notes"].splitlines():
+            print(f"    {line}")
+
 
 def match_incentives_for_building(conn) -> None:
     print("\nMatch incentives")
@@ -265,8 +271,53 @@ def import_pm_csv(conn) -> None:
     print(f"Import complete: {created} created, {updated} updated, {skipped} skipped (no name).")
 
 
+def import_prospect_csv(conn) -> None:
+    print("\nImport prospect list (Owner / Portfolio / Contact)")
+    print("Expected columns: Owner, Contact / Title, Properties In Portfolio, "
+          "Portfolio Assessed Value, Last Acquisition Date.")
+    path = prompt("Path to CSV file")
+    if not path:
+        return
+    path = os.path.expanduser(path)
+    if not os.path.isfile(path):
+        print(f"File not found: {path}")
+        return
+    try:
+        created, skipped = prospect_import.import_csv(path, conn)
+    except ValueError as exc:
+        print(f"Import failed: {exc}")
+        return
+    print(f"Import complete: {created} leads created, {skipped} skipped (no owner name).")
+    print("Each lead's score, tier, and recommended opening are in its notes — see 'View building detail'.")
+
+
+def top_priority_leads(conn) -> None:
+    print("\nTOP PRIORITY LEADS (A+/A tier prospects)")
+    print("-" * 42)
+    rows = conn.execute(
+        "SELECT * FROM buildings WHERE notes LIKE 'Prospect import%' "
+        "AND stage = 'LEAD' ORDER BY updated_at DESC"
+    ).fetchall()
+
+    ranked = []
+    for row in rows:
+        first_line = (row["notes"] or "").splitlines()[0] if row["notes"] else ""
+        if "Tier A+" in first_line or "Tier A " in first_line or first_line.endswith("Tier A"):
+            ranked.append(row)
+
+    if not ranked:
+        print("No A/A+ tier prospects yet — import a prospect list first.")
+        return
+
+    for row in ranked:
+        print(f"\n#{row['id']} {row['name']}" + (f" — {row['contact_name']}" if row["contact_name"] else ""))
+        for line in (row["notes"] or "").splitlines():
+            print(f"    {line}")
+
+
 MENU = [
     ("List pipeline", list_pipeline),
+    ("Top priority leads (A/A+ tier)", top_priority_leads),
     ("Add building / lead", add_building),
     ("View building detail", view_building),
     ("Update stage", update_stage),
@@ -274,6 +325,7 @@ MENU = [
     ("Match incentives for a building", match_incentives_for_building),
     ("Financing calculator (standalone)", lambda _conn: financing_calculator()),
     ("Import Portfolio Manager CSV", import_pm_csv),
+    ("Import prospect list (Owner / Portfolio)", import_prospect_csv),
 ]
 
 
